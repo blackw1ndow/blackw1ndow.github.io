@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4</title>
+    <style>
+        .container {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .tasks {
+            font-size: 18px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Тестування з програмування</h1>
+
+        <div class="question">
+            <p>1. Яка мова програмування використовується для стилізації веб-сторінок?</p>
+            <input type="radio" name="q1" value="0"> JavaScript
+            <input type="radio" name="q1" value="0"> Python
+            <input type="radio" name="q1" value="1"> CSS
+            <input type="radio" name="q1" value="0"> Java
+        </div>
+
+        <div class="question">
+            <p>2. Який тег HTML використовується для створення заголовка найвищого рівня?</p>
+            <input type="radio" name="q2" value="0"> header
+            <input type="radio" name="q2" value="0"> heading
+            <input type="radio" name="q2" value="1"> h1
+            <input type="radio" name="q2" value="0"> title
+        </div>
+
+        <div class="question">
+            <p>3. Які з перелічених мов є компільованими? (2 правильні)</p>
+            <input type="checkbox" name="q3" value="1"> C++
+            <input type="checkbox" name="q3" value="0"> JavaScript
+            <input type="checkbox" name="q3" value="1"> Go
+            <input type="checkbox" name="q3" value="0"> Python
+        </div>
+
+        <div class="question">
+            <p>4. Які з перелічених структур даних є лінійними? (2 правильні)</p>
+            <input type="checkbox" name="q4" value="1"> Масив
+            <input type="checkbox" name="q4" value="0"> Дерево
+            <input type="checkbox" name="q4" value="1"> Черга
+            <input type="checkbox" name="q4" value="0"> Граф
+        </div>
+
+        <div class="question">
+            <p>5. Який метод масиву JavaScript повертає новий масив?</p>
+            <select name="q5">
+                <option value="0">push()</option>
+                <option value="1">map()</option>
+                <option value="0">sort()</option>
+                <option value="0">reverse()</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <p>6. Які з перелічених операторів є операторами порівняння в JavaScript? (2 правильні)</p>
+            <select name="q6" multiple size="4">
+                <option value="1">===</option>
+                <option value="0">=</option>
+                <option value="1">!=</option>
+                <option value="0">+</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <p>7. Напишіть назву фреймворку JavaScript для створення користувацьких інтерфейсів:</p>
+            <input type="text" name="q7">
+        </div>
+
+        <button onclick="checkTest()">Завершити тестування</button>
+
+        <div id="results" style="display:none">
+            <h2>Результати</h2>
+            <table>
+                <tr><th>Питання</th><th>Відповідь</th><th>Бали</th></tr>
+                <tbody id="resultsBody"></tbody>
+            </table>
+            <p>Загальний бал: <span id="totalScore">0</span>/7</p>
+        </div>
+    </div>
+
+    <script>
+        function checkTest() {
+            let totalScore = 0;
+            const resultsBody = document.getElementById('resultsBody');
+            resultsBody.innerHTML = '';
+
+            const q1Score = getRadioScore('q1');
+            totalScore += q1Score;
+            resultsBody.innerHTML += `<tr><td>1</td><td>${getRadioText('q1')}</td><td>${q1Score}</td></tr>`;
+
+            const q2Score = getRadioScore('q2');
+            totalScore += q2Score;
+            resultsBody.innerHTML += `<tr><td>2</td><td>${getRadioText('q2')}</td><td>${q2Score}</td></tr>`;
+
+            const q3Score = getCheckboxScore('q3');
+            totalScore += q3Score;
+            resultsBody.innerHTML += `<tr><td>3</td><td>${getCheckboxText('q3')}</td><td>${q3Score}</td></tr>`;
+
+            const q4Score = getCheckboxScore('q4');
+            totalScore += q4Score;
+            resultsBody.innerHTML += `<tr><td>4</td><td>${getCheckboxText('q4')}</td><td>${q4Score}</td></tr>`;
+
+            const q5Score = getSelectScore('q5');
+            totalScore += q5Score;
+            resultsBody.innerHTML += `<tr><td>5</td><td>${getSelectText('q5')}</td><td>${q5Score}</td></tr>`;
+
+            const q6Score = getMultiSelectScore('q6');
+            totalScore += q6Score;
+            resultsBody.innerHTML += `<tr><td>6</td><td>${getMultiSelectText('q6')}</td><td>${q6Score}</td></tr>`;
+
+            const q7Score = getTextScore('q7');
+            totalScore += q7Score;
+            resultsBody.innerHTML += `<tr><td>7</td><td>${getTextValue('q7')}</td><td>${q7Score}</td></tr>`;
+
+            document.getElementById('totalScore').textContent = totalScore;
+            document.getElementById('results').style.display = 'block';
+        }
+
+        function getRadioScore(name) {
+            const radios = document.getElementsByName(name);
+            for (let radio of radios) {
+                if (radio.checked) return parseInt(radio.value);
+            }
+            return 0;
+        }
+
+        function getRadioText(name) {
+            const radios = document.getElementsByName(name);
+            for (let radio of radios) {
+                if (radio.checked) return radio.nextSibling.textContent.trim();
+            }
+            return "-";
+        }
+
+        function getCheckboxScore(name) {
+            const checkboxes = document.getElementsByName(name);
+            let selected = [];
+            for (let checkbox of checkboxes) {
+                if (checkbox.checked) selected.push(checkbox.value);
+            }
+            if (selected.length !== 2) return 0;
+            return selected.filter(val => val === "1").length;
+        }
+
+        function getCheckboxText(name) {
+            const checkboxes = document.getElementsByName(name);
+            let selected = [];
+            for (let checkbox of checkboxes) {
+                if (checkbox.checked) selected.push(checkbox.nextSibling.textContent.trim());
+            }
+            return selected.length > 0 ? selected.join(", ") : "-";
+        }
+
+        function getSelectScore(name) {
+            const select = document.querySelector(`select[name="${name}"]`);
+            return parseInt(select.value);
+        }
+
+        function getSelectText(name) {
+            const select = document.querySelector(`select[name="${name}"]`);
+            return select.options[select.selectedIndex].text;
+        }
+
+        function getMultiSelectScore(name) {
+            const select = document.querySelector(`select[name="${name}"]`);
+            let selected = [];
+            for (let option of select.options) {
+                if (option.selected) selected.push(option.value);
+            }
+            if (selected.length !== 2) return 0;
+            return selected.filter(val => val === "1").length;
+        }
+
+        function getMultiSelectText(name) {
+            const select = document.querySelector(`select[name="${name}"]`);
+            let selected = [];
+            for (let option of select.options) {
+                if (option.selected) selected.push(option.text);
+            }
+            return selected.length > 0 ? selected.join(", ") : "-";
+        }
+
+        function getTextScore(name) {
+            const input = document.querySelector(`input[name="${name}"]`);
+            const answer = input.value.toLowerCase().trim();
+            return (answer === "react" || answer === "vue" || answer === "angular") ? 1 : 0;
+        }
+
+        function getTextValue(name) {
+            const input = document.querySelector(`input[name="${name}"]`);
+            return input.value || "-";
+        }
+    </script>
+</body>
+</html>
