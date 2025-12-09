@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 11</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .pseudo-demo p::first-letter {
+            font-size: 2em;
+            font-weight: bold;
+            color: crimson;
+        }
+
+        .pseudo-demo p::first-line {
+            font-style: italic;
+            background-color: #e0e0e0;
+        }
+
+        .pseudo-demo h3::before {
+            content: "★ ";
+            color: gold;
+        }
+
+        .pseudo-demo h3::after {
+            content: " ★";
+            color: gold;
+        }
+
+        .links-demo a:link {
+            color: blue;
+            text-decoration: none;
+        }
+        .links-demo a:visited {
+            color: purple;
+        }
+        .links-demo a:hover {
+            color: red;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .links-demo a:active {
+            color: green;
+            background-color: yellow;
+        }
+
+        input:required:valid {
+            border: 2px solid green;
+            background-color: #eaffea;
+        }
+        
+        input:required:invalid {
+            border: 2px solid red;
+            background-color: #ffeaea;
+        }
+
+        .variant-demo ul li:nth-child(odd) {
+            background-color: #d1ecf1;
+        }
+        .variant-demo ul li:nth-child(even) {
+            background-color: #fff3cd;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+        
+        fieldset {
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #555;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button, input[type="submit"], input[type="reset"], input[type="button"] {
+            margin-top: 15px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Лабораторна робота №11</h1>
+
+    <section class="pseudo-demo">
+        <h2>Завдання 2: Псевдоелементи</h2>
+        <h3>Заголовок з ::before та ::after</h3>
+        <p>Це абзац тексту для демонстрації псевдоелементів. Перша літера цього абзацу буде великою та червоною завдяки ::first-letter. Перший рядок цього тексту буде виділено курсивом та сірим фоном завдяки ::first-line. Це дозволяє стилізувати текст без додавання зайвих тегів span.</p>
+    </section>
+
+    <section class="links-demo">
+        <h2>Завдання 3: Псевдокласи посилань</h2>
+        <p>Наведіть курсор або натисніть на посилання:</p>
+        <ul>
+            <li><a href="#">Це посилання (link/hover/active)</a></li>
+            <li><a href="">Це відвідане посилання (visited)</a></li>
+        </ul>
+    </section>
+
+    <section class="variant-demo">
+        <h2>Завдання 4: Варіант 4 (:nth-child)</h2>
+        <p>Список, стилізований через <code>:nth-child(odd/even)</code>:</p>
+        <ul>
+            <li>Елемент списку 1 (непарний)</li>
+            <li>Елемент списку 2 (парний)</li>
+            <li>Елемент списку 3 (непарний)</li>
+            <li>Елемент списку 4 (парний)</li>
+            <li>Елемент списку 5 (непарний)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Завдання 1: Веб-форма</h2>
+        <form action="#" method="post">
+            
+            <fieldset>
+                <legend>Особисті дані</legend>
+                
+                <label for="username">Ім'я (text):</label>
+                <input type="text" id="username" name="username" placeholder="Введіть ваше ім'я" required>
+
+                <label for="email">Email (валідація :valid/:invalid):</label>
+                <input type="email" id="email" name="email" required placeholder="example@mail.com">
+
+                <label for="pwd">Пароль (password):</label>
+                <input type="password" id="pwd" name="pwd">
+            </fieldset>
+
+            <fieldset>
+                <legend>Деталі</legend>
+
+                <label for="about">Про себе (textarea):</label>
+                <textarea id="about" name="about" rows="4"></textarea>
+
+                <label for="experience">Рівень досвіду (range):</label>
+                <input type="range" id="experience" name="experience" min="1" max="10">
+
+                <p>Стать (radio, один обраний за замовчуванням):</p>
+                <label style="display:inline; font-weight:normal;">
+                    <input type="radio" name="gender" value="male" checked> Чоловіча
+                </label>
+                <label style="display:inline; font-weight:normal;">
+                    <input type="radio" name="gender" value="female"> Жіноча
+                </label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Вподобання</legend>
+
+                <p>Що вивчаєте (checkbox):</p>
+                <label style="display:inline; font-weight:normal;">
+                    <input type="checkbox" name="lang" value="html"> HTML
+                </label>
+                <label style="display:inline; font-weight:normal;">
+                    <input type="checkbox" name="lang" value="css"> CSS
+                </label>
+                <label style="display:inline; font-weight:normal;">
+                    <input type="checkbox" name="lang" value="js"> JavaScript
+                </label>
+
+                <label for="city">Місто (select + optgroup):</label>
+                <select id="city" name="city">
+                    <optgroup label="Україна">
+                        <option value="kyiv">Київ</option>
+                        <option value="lviv">Львів</option>
+                        <option value="odessa">Одеса</option>
+                    </optgroup>
+                    <optgroup label="Інші">
+                        <option value="warsaw">Варшава</option>
+                        <option value="london">Лондон</option>
+                    </optgroup>
+                </select>
+
+                <label for="os">Операційні системи (multiple select):</label>
+                <select id="os" name="os" multiple size="3">
+                    <option value="win">Windows</option>
+                    <option value="linux">Linux</option>
+                    <option value="macos">MacOS</option>
+                </select>
+            </fieldset>
+
+            <div style="margin-top: 20px;">
+                <input type="submit" value="Відправити дані">
+                <input type="reset" value="Очистити форму">
+                <input type="button" value="Click me!" onClick='alert("Oh, you have been clicked me!!!")'>
+            </div>
+        </form>
+    </section>
+
+</body>
+</html>
