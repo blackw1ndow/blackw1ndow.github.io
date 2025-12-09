@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Картинки дивимся</title>
+    <style>
+        .container {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .tasks {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Перегляд зображень</h1>
+        <div>
+            <img id="image" src="" style="max-width: 500px; max-height: 400px; margin-bottom: 10px;">
+        </div>
+        <button onclick="prevImage()">Назад</button>
+        <button onclick="nextImage()">Вперед</button>
+    </div>
+
+    <script>
+        const images = ['image/image1.png', 'image/image2.jpeg', 'image/image3.webp', 'image/image4.jpg'];
+        let currentIndex = 0;
+        
+        document.getElementById('image').src = images[currentIndex];
+        
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            document.getElementById('image').src = images[currentIndex];
+        }
+        
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            document.getElementById('image').src = images[currentIndex];
+        }
+    </script>
+</body>
+</html>

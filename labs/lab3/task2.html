@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Екранна клавіатура</title>
+    <style>
+        .container {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .tasks {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Екранна клавіатура mod</h1>
+        <textarea id="textField" rows="5" style="width: 100%; margin-bottom: 10px;"></textarea>
+        <button onclick="switchLayout()">Alt+Shift</button>
+        <div id="keyboard"></div>
+        <button onclick="clearField()">Очистити поле</button>
+        <a href="../index.html" class="back-link">Назад</a>
+    </div>
+    <script>
+        const ukrainian = ['й','ц','у','к','е','н','г','ш','щ','з','х','ї',
+                           'ф','і','в','а','п','р','о','л','д','ж','є',
+                           'я','ч','с','м','и','т','ь','б','ю'];
+        const english = ['q','w','e','r','t','y','u','i','o','p','[',']',
+                         'a','s','d','f','g','h','j','k','l',';','\'',
+                         'z','x','c','v','b','n','m',',','.'];
+        const numbers = ['1','2','3','4','5','6','7','8','9','0'];
+        
+        let currentLayout = 'ukrainian';
+        
+        function renderKeyboard() {
+            const keyboard = document.getElementById('keyboard');
+            keyboard.innerHTML = '';
+            
+            const letters = currentLayout === 'ukrainian' ? ukrainian : english;
+            
+            const numbersRow = document.createElement('div');
+            numbers.forEach(num => {
+                const button = document.createElement('button');
+                button.textContent = num;
+                button.onclick = () => addChar(num);
+                numbersRow.appendChild(button);
+            });
+            keyboard.appendChild(numbersRow);
+            
+            for (let i = 0; i < 3; i++) {
+                const row = document.createElement('div');
+                const start = i * 11;
+                const end = start + 11;
+                letters.slice(start, end).forEach(letter => {
+                    const button = document.createElement('button');
+                    button.textContent = letter;
+                    button.onclick = () => addChar(letter);
+                    row.appendChild(button);
+                });
+                keyboard.appendChild(row);
+            }
+        }
+        
+        function switchLayout() {
+            currentLayout = currentLayout === 'ukrainian' ? 'english' : 'ukrainian';
+            renderKeyboard();
+        }
+        
+        function addChar(char) {
+            document.getElementById('textField').value += char;
+        }
+        
+        function clearField() {
+            document.getElementById('textField').value = '';
+        }
+        
+        renderKeyboard();
+    </script>
+</body>
+</html>

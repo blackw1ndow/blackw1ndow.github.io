@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 3</title>
+    <style>
+        .container {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .tasks {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Арифметичний тест</h1>
+        
+        <div id="score">Загальний рахунок: 0% (0 правильних відповідей з 0)</div>
+        
+        <div id="task"></div>
+        
+        <input type="number" id="answer">
+        
+        <button onclick="checkAnswer()">Перевірити</button>
+        <button onclick="nextTask()">Наступне завдання</button>
+        
+        <div id="result"></div>
+        
+        <div id="progress">Завдання 0 з 5</div>
+
+        <a href="../index.html" class="back-link">Назад</a>
+    </div>
+
+    <script>
+        const operations = ['+', '-', '*', '/'];
+        let currentTask = 0;
+        let correctAnswers = 0;
+        let totalTasks = 5;
+        let currentExpression = '';
+        let correctAnswer = 0;
+        
+        function generateTask() {
+            const num1 = Math.floor(Math.random() * 10);
+            let num2 = Math.floor(Math.random() * 10);
+            const operation = operations[Math.floor(Math.random() * operations.length)];
+            
+            if (operation === '/') {
+                while (num2 === 0) {
+                    num2 = Math.floor(Math.random() * 10);
+                }
+                correctAnswer = num1 * num2;
+                currentExpression = `${correctAnswer} ${operation} ${num2}`;
+                correctAnswer = correctAnswer / num2;
+            } else {
+                currentExpression = `${num1} ${operation} ${num2}`;
+                switch(operation) {
+                    case '+': correctAnswer = num1 + num2; break;
+                    case '-': correctAnswer = num1 - num2; break;
+                    case '*': correctAnswer = num1 * num2; break;
+                }
+            }
+            
+            document.getElementById('task').textContent = currentExpression + ' =';
+            document.getElementById('answer').value = '';
+            document.getElementById('result').textContent = '';
+        }
+        
+        function checkAnswer() {
+            const userAnswer = parseFloat(document.getElementById('answer').value);
+            
+            if (isNaN(userAnswer)) {
+                document.getElementById('result').textContent = 'Будь ласка, введіть число!';
+                return;
+            }
+            
+            if (userAnswer === correctAnswer) {
+                document.getElementById('result').textContent = 'Правильно!';
+                correctAnswers++;
+            } else {
+                document.getElementById('result').textContent = `Помилка, правильна відповідь «${correctAnswer}»`;
+            }
+            
+            updateScore();
+        }
+        
+        function updateScore() {
+            const percentage = currentTask > 0 ? Math.round((correctAnswers / currentTask) * 100) : 0;
+            document.getElementById('score').textContent = 
+                `Загальний рахунок: ${percentage}% (${correctAnswers} правильних відповідей з ${currentTask})`;
+        }
+        
+        function nextTask() {
+            currentTask++;
+            
+            if (currentTask > totalTasks) {
+                document.getElementById('task').textContent = 'Тест завершено!';
+                document.getElementById('answer').style.display = 'none';
+                document.getElementById('progress').textContent = 'Всі завдання виконано!'; 
+            } else {
+                generateTask();
+                document.getElementById('progress').textContent = `Завдання ${currentTask} з ${totalTasks}`;
+            }
+        }
+        
+        updateScore();
+        nextTask();
+    </script>
+</body>
+</html>

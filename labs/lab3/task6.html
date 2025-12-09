@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 3</title>
+    <style>
+        .container {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .tasks {
+            font-size: 18px;
+        }
+        .tree ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        .tree li {
+            margin: 5px 0;
+        }
+        .toggle {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ієрархія продуктів</h1>
+        <div id="tree" class="tree"></div>
+    </div>
+
+    <script>
+        const data = {
+            "fruits": ["apple", "pineapple", "appricot", "pear", "lemon"],
+            "vegetables": ["potatoes", "beetroot", "carrots", "pear"]
+        };
+
+        const tree = document.getElementById('tree');
+
+        for (const category in data) {
+            const categoryItem = document.createElement('div');
+            
+            const toggle = document.createElement('span');
+            toggle.className = 'toggle';
+            toggle.textContent = category;
+            toggle.onclick = function() {
+                const list = this.nextElementSibling;
+                list.classList.toggle('hidden');
+            };
+            
+            const list = document.createElement('ul');
+            data[category].forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                list.appendChild(li);
+            });
+            list.classList.add('hidden');
+            
+            categoryItem.appendChild(toggle);
+            categoryItem.appendChild(list);
+            tree.appendChild(categoryItem);
+        }
+    </script>
+</body>
+</html>

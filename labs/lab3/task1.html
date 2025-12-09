@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Площа прямокутника</title>
+    <style>
+        .container {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .tasks {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Площа прямокутника</h1>
+        <div>
+            <label>Сторона a: </label>
+            <input type="number" id="a">
+        </div>
+        <div>
+            <label>Сторона b: </label>
+            <input type="number" id="b">
+        </div>
+        <button onclick="calculate()">Обчислити</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const result = a * b;
+            document.getElementById('result').innerHTML = 'Площа: ' + result;
+        }
+    </script>
+</body>
+</html>
