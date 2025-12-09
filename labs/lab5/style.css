@@ -1,0 +1,257 @@
+body {
+    background-color: #898d9b; 
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#tabbed_box {
+    margin: 40px auto 0px auto;
+    width: 300px;
+}
+
+.tabbed_box h4 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 23px;
+    color: #ffffff;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+}
+
+.tabbed_box h4 small {
+    color: #e3e9ec;
+    font-weight: normal;
+    font-size: 9px;
+    text-transform: uppercase;
+    position: relative;
+    top: -4px;
+    left: 6px;
+    letter-spacing: 0px;
+}
+
+.tabbed_area {
+    border: 1px solid #5e6469;
+    background-color: #747e86;
+    padding: 5px;
+}
+
+ul.tabs {
+    margin: 0px;
+    padding: 0px;
+    margin-top: 5px;
+    margin-bottom: 6px;
+}
+
+ul.tabs li {
+    list-style: none;
+    display: inline;
+}
+
+ul.tabs li a {
+    background-color: #5e6469;
+    color: #ffebb5;
+    padding: 8px 14px 8px 14px;
+    text-decoration: none;
+    font-size: 9px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid #5e6469;
+    transition: background-color 0.2s;
+}
+
+ul.tabs li a:hover {
+    background-color: #2f343a;
+    border-color: #2f343a;
+}
+
+ul.tabs li a.active {
+    background-color: #ffffff;
+    color: #282e32;
+    border: 1px solid #5e6469;
+    border-bottom: 1px solid #ffffff;
+}
+
+.content {
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #464c54;
+    display: none;
+}
+
+#content_1 {
+    display: block;
+}
+
+.content ul {
+    margin: 0px;
+    padding: 0px 20px 0px 20px;
+}
+
+.content ul li {
+    list-style: none;
+    border-bottom: 1px solid #d6dde0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 13px;
+}
+
+.content ul li:last-child {
+    border-bottom: none;
+}
+
+.content ul li a {
+    text-decoration: none;
+    color: #3e4346;
+}
+
+.content ul li a small {
+    color: #8b959c;
+    font-size: 9px;
+    text-transform: uppercase;
+    position: relative;
+    left: 4px;
+}
+
+body.dark-theme {
+    background-color: #222;
+    color: #eee;
+}
+
+body.dark-theme .tabbed_box h4 {
+    color: #eee;
+}
+
+body.dark-theme .content {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
+}
+
+body.dark-theme .content ul li {
+    border-bottom-color: #555;
+}
+
+body.dark-theme .content ul li a {
+    color: #ddd;
+}
+
+body.dark-theme ul.tabs li a.active {
+    background-color: #333;
+    color: #fff;
+    border-bottom-color: #333;
+}
+
+.theme-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background: #ffebb5;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-window {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.popup-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    background: #464c54;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+nav {
+    background: #202020;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: white;
+    border-radius: 5px;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-links {
+    display: flex;
+    margin-right: 150px;
+    gap: 15px;
+}
+
+.menu-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.niggerburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .menu-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+    }
+    .menu-links.open {
+        display: flex;
+        animation: fadeIn 0.5s;
+    }
+    .nigger {
+        display: block;
+    }
+    .menu-container {
+        flex-wrap: wrap;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+}
