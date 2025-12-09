@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 1</title>
+</head>
+<body>
+    <script>
+        let mail = "dwbyu@mail.ua";
+        let regex = /^([a-z0-9]+)(\.[a-z0-9]+)*@([a-z0-9]+)(\.[a-z0-9]+)*$/i;
+        let match = mail.match(regex);
+        let desc = ["Повний рядок", "Логін", "Крапки в логіні", "Назва сервісу", "Доменна зона"];
+
+        if (match) {
+            for (let i = 0; i < match.length; i++) {
+                let val = match[i] ? match[i] : "порожньо";
+                document.writeln("<hr> " + i + " (" + desc[i] + "): " + val);
+            }
+        } else {
+            document.writeln("Немає збігу");
+        }
+    </script>
+</body>
+</html>

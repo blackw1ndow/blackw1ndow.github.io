@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 6 - Завдання 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 60%;
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Стилі для валідації [cite: 35] */
+        .valid {
+            border-color: green !important;
+            color: black;
+        }
+        .invalid {
+            border-color: red !important;
+            color: red;
+        }
+        
+        /* Елементи зворотного зв'язку */
+        .status-icon, .error-msg {
+            margin-left: 10px;
+            display: none; /* Приховано за замовчуванням */
+        }
+        
+        /* Коли валідно - показуємо галочку */
+        .valid + .status-icon {
+            display: inline-block;
+            color: green;
+            font-weight: bold;
+        }
+
+        /* Коли невалідно - показуємо повідомлення */
+        .invalid ~ .error-msg {
+            display: inline-block;
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Реєстраційна форма</h2>
+
+    <form id="regForm">
+        <div class="form-group">
+            <label for="email">E-mail (повинен бути ...@pnu.edu.ua):</label>
+            <input type="text" id="email" placeholder="example@pnu.edu.ua">
+            <span class="status-icon">✔</span>
+            <span class="error-msg">Помилка! Має містити @pnu.edu.ua</span>
+        </div>
+
+        <div class="form-group">
+            <label for="fullname">Ім'я та Прізвище (Іван PETRENKO):</label>
+            <input type="text" id="fullname" placeholder="Ivan PETRENKO">
+            <span class="status-icon">✔</span>
+            <span class="error-msg">Формат: "Ім'я ПРІЗВИЩЕ" (друге слово капсом)</span>
+        </div>
+
+        <div class="form-group">
+            <label for="login">Логін (тільки латина):</label>
+            <input type="text" id="login" placeholder="userLogin">
+            <span class="status-icon">✔</span>
+            <span class="error-msg">Тільки латинські літери</span>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Пароль (мін 8 симв, буква, цифра, спецсимвол):</label>
+            <input type="password" id="password" placeholder="********">
+            <span class="status-icon">✔</span>
+            <span class="error-msg">Мін. 8 симв., 1 буква, 1 цифра, 1 спецсимвол (_-!@#$%^&*)</span>
+        </div>
+
+        <div class="form-group">
+            <label for="zip">Поштовий індекс (5 цифр):</label>
+            <input type="text" id="zip" placeholder="76000">
+            <span class="status-icon">✔</span>
+            <span class="error-msg">Має бути рівно 5 цифр</span>
+        </div>
+
+        <button type="button" onclick="validateForm()">Перевірити</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            // Отримання значень полів
+            const email = document.getElementById('email');
+            const fullname = document.getElementById('fullname');
+            const login = document.getElementById('login');
+            const password = document.getElementById('password');
+            const zip = document.getElementById('zip');
+
+            // --- Регулярні вирази [cite: 29] ---
+
+            // 1. Email: наявність @, після якого pnu.edu.ua [cite: 30]
+            const regexEmail = /.+@pnu\.edu\.ua$/;
+
+            // 2. Ім'я Прізвище: Перше слово (1 вел, інші мал), Друге (всі вел). Кирилиця і латина. [cite: 31]
+            // Використовуємо діапазони для укр/англ літер.
+            const regexName = /^[A-ZА-ЯІЇЄҐ][a-zа-яіїєґ']+\s[A-ZА-ЯІЇЄҐ]+$/;
+
+            // 3. Логін: тільки латина [cite: 32]
+            const regexLogin = /^[a-zA-Z]+$/;
+
+            // 4. Пароль: мін 8, мін 1 буква, 1 цифра, 1 спецсимвол [cite: 33]
+            // (?=.*[A-Za-z]) - є хоча б одна буква
+            // (?=.*\d) - є хоча б одна цифра
+            // (?=.*[_\-!@#$%^&*]) - є хоча б один спецсимвол
+            // .{8,} - довжина від 8
+            const regexPass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[_\-!@#$%^&*]).{8,}$/;
+
+            // 5. Індекс: 5 цифр [cite: 34]
+            const regexZip = /^\d{5}$/;
+
+            // --- Функція перевірки одного поля ---
+            function checkField(inputElement, regex) {
+                if (regex.test(inputElement.value)) {
+                    // Якщо вірно: зелена рамка, прибрати клас invalid, додати valid [cite: 35]
+                    inputElement.classList.remove('invalid');
+                    inputElement.classList.add('valid');
+                } else {
+                    // Якщо помилка: червона рамка і текст
+                    inputElement.classList.remove('valid');
+                    inputElement.classList.add('invalid');
+                }
+            }
+
+            // Виклик перевірки для кожного поля
+            checkField(email, regexEmail);
+            checkField(fullname, regexName);
+            checkField(login, regexLogin);
+            checkField(password, regexPass);
+            checkField(zip, regexZip);
+        }
+    </script>
+</body>
+</html>
