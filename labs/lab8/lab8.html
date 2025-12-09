@@ -1,1 +1,247 @@
-blackw1ndow
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота 8 (Варіант 4)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Лабораторна робота №8 (Варіант 4)</h1>
+
+    <div class="task">
+        <h3>Завдання 1: Об'єкт Час</h3>
+        <button onclick="task1_show()">Показати поточний час</button>
+        <br>
+        <input type="number" id="t1_sec" value="30" placeholder="Секунди">
+        <button onclick="task1_add()">Додати секунди</button>
+        <div id="res1" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 2.1: Поточна дата</h3>
+        <button onclick="task2_1()">Вивести дату</button>
+        <div id="res2_1" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 2.2: Останній день місяця</h3>
+        <input type="number" id="t2_year" placeholder="Рік (2025)">
+        <input type="number" id="t2_month" placeholder="Місяць (1-12)">
+        <button onclick="task2_2()">Дізнатися</button>
+        <div id="res2_2" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 2.3: Секунди дня</h3>
+        <button onclick="task2_3()">Розрахувати</button>
+        <div id="res2_3" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 3-5: Класи (Car, ElectricCar, Static)</h3>
+        <button onclick="demoClasses()">Демонстрація</button>
+        <div id="res_classes" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 6 (Варіант 4): Банківський рахунок</h3>
+        <div id="createBlock">
+            <input type="text" id="bank_owner" placeholder="Власник">
+            <input type="number" id="bank_balance" placeholder="Баланс" value="1000">
+            <input type="number" id="bank_rate" placeholder="Ставка %" value="5">
+            <button onclick="createAccount()">Створити рахунок</button>
+        </div>
+        
+        <div id="opsBlock" class="hidden">
+            <br>
+            <input type="number" id="amount_op" placeholder="Сума">
+            <button onclick="accDeposit()">Покласти</button>
+            <button onclick="accWithdraw()">Зняти</button>
+            <button onclick="accInterest()">Нарахувати %</button>
+            <br>
+            <button onclick="accInfo()">Інфо</button>
+            <button onclick="accClear()">Очистити поля</button>
+        </div>
+
+        <div id="res_bank" class="result"></div>
+    </div>
+
+    <script>
+        function show(id, text) {
+            document.getElementById(id).innerText = text;
+        }
+
+        let myTime = {
+            hours: 0, minutes: 0, seconds: 0,
+            setNow: function() {
+                const d = new Date();
+                this.hours = d.getHours();
+                this.minutes = d.getMinutes();
+                this.seconds = d.getSeconds();
+            },
+            toString: function() {
+                const p = n => n.toString().padStart(2, '0');
+                return `${p(this.hours)}:${p(this.minutes)}:${p(this.seconds)}`;
+            },
+            addSeconds: function(s) {
+                let total = this.hours * 3600 + this.minutes * 60 + this.seconds + s;
+                total %= 86400;
+                this.hours = Math.floor(total / 3600);
+                total %= 3600;
+                this.minutes = Math.floor(total / 60);
+                this.seconds = total % 60;
+            }
+        };
+
+        function task1_show() {
+            myTime.setNow();
+            show('res1', myTime.toString());
+        }
+
+        function task1_add() {
+            const s = parseInt(document.getElementById('t1_sec').value) || 0;
+            myTime.addSeconds(s);
+            show('res1', myTime.toString());
+        }
+
+        function task2_1() {
+            const d = new Date();
+            const m = ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'];
+            const w = ['неділя', 'понеділок', 'вівторок', 'середа', 'четвер', 'п\'ятниця', 'субота'];
+            const txt = `Дата: ${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()} року
+День тижня: ${w[d.getDay()]}
+Час: ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
+            show('res2_1', txt);
+        }
+
+        function task2_2() {
+            const y = document.getElementById('t2_year').value;
+            const m = document.getElementById('t2_month').value;
+            if(!y || !m) return;
+            const last = new Date(y, m, 0).getDate();
+            show('res2_2', last);
+        }
+
+        function task2_3() {
+            const now = new Date();
+            const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+            const passed = Math.round((now - start) / 1000);
+            const left = Math.round((end - now) / 1000);
+            show('res2_3', `Пройшло: ${passed}\nЗалишилось: ${left}`);
+        }
+
+        class Car {
+            constructor(brand, model, year) {
+                this.brand = brand;
+                this.model = model;
+                this.year = year;
+            }
+            info() {
+                return `${this.brand} ${this.model} (${this.year})`;
+            }
+        }
+
+        class ElectricCar extends Car {
+            constructor(brand, model, year, bat) {
+                super(brand, model, year);
+                this.bat = bat;
+            }
+            charge() {
+                return `Зарядка... ${this.bat} kWh`;
+            }
+        }
+
+        class MathHelper {
+            static add(a, b) { return a + b; }
+        }
+
+        function demoClasses() {
+            const c = new Car("Toyota", "Corolla", 2020);
+            const e = new ElectricCar("Tesla", "Y", 2023, 75);
+            const s = MathHelper.add(5, 7);
+            show('res_classes', `Car: ${c.info()}\nEV: ${e.info()}\nCharge: ${e.charge()}\nStatic sum: ${s}`);
+        }
+
+        class BankAccount {
+            static bankName = "MonoPrivat";
+            constructor(owner, balance) {
+                this.owner = owner;
+                this.balance = Number(balance);
+            }
+            deposit(amount) {
+                this.balance += Number(amount);
+                return `Баланс: ${this.balance}`;
+            }
+            withdraw(amount) {
+                if(amount > this.balance) return "Нема коштів";
+                this.balance -= amount;
+                return `Баланс: ${this.balance}`;
+            }
+            getInfo() {
+                return `Клієнт: ${this.owner}, Баланс: ${this.balance}`;
+            }
+        }
+
+        class SavingAccount extends BankAccount {
+            constructor(owner, balance, rate) {
+                super(owner, balance);
+                this.rate = Number(rate);
+            }
+            addInterest() {
+                const p = this.balance * (this.rate / 100);
+                this.balance += p;
+                return `+${p.toFixed(2)}. Баланс: ${this.balance.toFixed(2)}`;
+            }
+            getInfo() {
+                return `${super.getInfo()}, Ставка: ${this.rate}%`;
+            }
+        }
+
+        let currAcc = null;
+
+        function createAccount() {
+            const o = document.getElementById('bank_owner').value;
+            const b = document.getElementById('bank_balance').value;
+            const r = document.getElementById('bank_rate').value;
+            if(!o || !b) return;
+            currAcc = new SavingAccount(o, b, r);
+            document.getElementById('opsBlock').classList.remove('hidden');
+            show('res_bank', `Створено в ${BankAccount.bankName}\n` + currAcc.getInfo());
+        }
+
+        function accDeposit() {
+            if(!currAcc) return;
+            const v = document.getElementById('amount_op').value;
+            show('res_bank', currAcc.deposit(v));
+        }
+
+        function accWithdraw() {
+            if(!currAcc) return;
+            const v = document.getElementById('amount_op').value;
+            show('res_bank', currAcc.withdraw(v));
+        }
+
+        function accInterest() {
+            if(!currAcc) return;
+            show('res_bank', currAcc.addInterest());
+        }
+
+        function accInfo() {
+            if(!currAcc) return;
+            show('res_bank', currAcc.getInfo());
+        }
+
+        function accClear() {
+            currAcc = null;
+            document.getElementById('bank_owner').value = '';
+            document.getElementById('bank_balance').value = '1000';
+            document.getElementById('bank_rate').value = '5';
+            document.getElementById('amount_op').value = '';
+            document.getElementById('opsBlock').classList.add('hidden');
+            show('res_bank', '');
+        }
+    </script>
+</body>
+</html>
