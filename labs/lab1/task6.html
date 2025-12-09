@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Склад товарів</title>
+</head>
+<body>
+    <form name="form1">
+        Оберіть товар:
+        <select name="productSelect">
+            <option value="0">Книга</option>
+            <option value="1">Не книги</option>
+            <option value="2">Чівапчічі</option>
+        </select>
+        <br><br>
+        
+        <input type="button" value="Наявна кількість і вартість" onclick="fun1()">
+        <br>
+        <input type="text" name="output_quantity" size="50">
+        <br>
+        <input type="text" name="output_cost" size="50">
+        <br><br>
+        
+        <input type="button" value="Загальна сума" onclick="fun2()">
+        <br>
+        <input type="text" name="output_total" size="50">
+    </form>
+
+    <script>
+        let products = ["Книга", "Кроси", "Клавіатура"];
+        let quantities = ["50", "25", "30"];
+        let costs = ["250", "1200", "800"];
+        let currentIndex = -1;
+
+        function fun1() {
+            currentIndex = document.form1.productSelect.value;
+            document.form1.output_quantity.value = "Кількість: " + quantities[currentIndex] + " шт.";
+            document.form1.output_cost.value = "Ціна: " + costs[currentIndex] + " грн.";
+        }
+
+        function fun2() {
+            if (currentIndex == -1) {
+                alert("Спочатку виберіть товар");
+                return;
+            }
+            let total = quantities[currentIndex] * costs[currentIndex];
+            document.form1.output_total.value = "Загальна сума: " + total + " грн.";
+        }
+    </script>
+</body>
+</html>
