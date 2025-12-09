@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 2</title>
+    <style>
+        .container {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        td {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 50px;
+            text-align: center;
+        }
+        .method {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .note {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container container">
+        <h1>Поточний час та дата</h1>
+        <div id="clock" class="clock"></div>
+        <div>Формат: year-month-day-hour-min-sec</div>
+    </div>
+
+    <div class="calculator-container container">
+        <h1>Калькулятор</h1>
+        <input type="text" id="display" readonly style="width: 200px; height: 30px; font-size: 18px; margin-bottom: 5px;">
+        <div>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('+')">+</button>
+        </div>
+        <div>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('-')">-</button>
+        </div>
+        <div>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('*')">*</button>
+        </div>
+        <div>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendToDisplay('/')">/</button>
+        </div>
+        <div>
+            <button onclick="clearDisplay()" style="background-color: #ff4444; color: white;">C</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Створення таблиці</h1>
+        <form id="matrixForm">
+            <table>
+                <tr>
+                    <td>Кількість рядків:</td>
+                    <td><input type="text" id="rows" value="3"></td>
+                </tr>
+                <tr>
+                    <td>Кількість стовпців:</td>
+                    <td><input type="text" id="cols" value="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="button" onclick="createMatrix()">Побудувати матрицю</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        
+        <div id="matrixContainer"></div>
+        <div id="resultContainer"></div>
+    </div>
+
+    <div class="container">
+        <div class="note">
+            Відкрийте консоль браузера (F12 → Console) для перегляду результатів.
+        </div>
+
+        <div class="method">
+            <h2>Завдання 4: Методи console.log()</h2>
+            <button onclick="test1()">Тест 1. остача від ділення</button>
+            <button onclick="test2()">Тест 2. ділення без остачі</button>
+            <button onclick="test3()">Тест 3. вивід масиву</button>
+            <button onclick="test4()">Тест 4. все в одному</button>
+        </div>
+
+        <div class="method">
+            <h2>Завдання 5: Інші методи консолі</h2>
+            <button onclick="showInfo()">console.info()</button>
+            <button onclick="showWarn()">console.warn()</button>
+            <button onclick="showError()">console.error()</button>
+            <button onclick="showDir()">console.dir()</button>
+            <button onclick="showDirXml()">console.dirxml()</button>
+            <button onclick="measureTime()">console.time()/timeEnd()</button>
+            <button onclick="startProfile()">console.profile()/profileEnd()</button>
+            <button onclick="testAssert()">console.assert()</button>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const day = now.getDate();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            
+            const timeString = `${year}-${month}-${day}-${hours}-${minutes}-${seconds}`;
+            
+            document.getElementById('clock').textContent = timeString;
+        }
+        
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function calculate() {
+            try {
+                document.getElementById('display').value = eval(document.getElementById('display').value);
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function createMatrix() {
+            const rows = parseInt(document.getElementById('rows').value);
+            const cols = parseInt(document.getElementById('cols').value);
+            
+            if (isNaN(rows) || isNaN(cols) || rows <= 0 || cols <= 0) {
+                alert('Будь ласка, введіть коректні значення для рядків та стовпців');
+                return;
+            }
+            
+            let tableHTML = '<table>';
+            
+            for (let i = 1; i <= rows; i++) {
+                tableHTML += '<tr>';
+                for (let j = 1; j <= cols; j++) {
+                    tableHTML += `<td><input type="text" id="cell_${i}_${j}" value="${i*2}${j*13}" style="width: 40px;"></td>`;
+                }
+                tableHTML += '</tr>';
+            }
+            tableHTML += '</table>';
+            
+            tableHTML += `<button onclick="calculateSum()">Розрахувати суму (елементи з однаковими номерами рядка та стовпця)</button>`;
+            
+            document.getElementById('matrixContainer').innerHTML = tableHTML;
+            document.getElementById('resultContainer').innerHTML = '';
+        }
+
+        function calculateSum() {
+            const rows = parseInt(document.getElementById('rows').value);
+            const cols = parseInt(document.getElementById('cols').value);
+            
+            let sum = 0;
+            let diagonalElements = [];
+            
+            for (let i = 1; i <= Math.min(rows, cols); i++) {
+                const cellValue = parseInt(document.getElementById(`cell_${i}_${i}`).value);
+                if (!isNaN(cellValue)) {
+                    sum += cellValue;
+                    diagonalElements.push(cellValue);
+                }
+            }
+            
+            document.getElementById('resultContainer').innerHTML = `
+                <p>Елементи з однаковими номерами рядка та стовпця: ${diagonalElements.join(', ')}</p>
+                <p><strong>Сума: ${sum}</strong></p>
+            `;
+        }
+
+        function test1() {
+            console.clear();
+            console.log("остача від ділення");
+            let a = 20;
+            let b = 7;
+            console.log(a % b);
+            console.log("остача 2: " + (a % b));
+            console.log("остача 3:", a % b);
+        }
+
+        function test2() {
+            console.clear();
+            console.log("ділення без остачі");
+            let x = 25;
+            let y = 5;
+            console.log(x % y === 0);
+            console.log("без остачі 2: " + (x % y === 0));
+            console.log("без остачі 3:", x % y === 0);
+            
+            let x2 = 15;
+            let y2 = 4;
+            console.log(x2 + " % " + y2 + " === 0 -> " + (x2 % y2 === 0));
+        }
+        
+        function test3() {
+            console.clear();
+            console.log("вивід масиву");
+            let arr = [10, 20, 30];
+            console.log(arr);
+            console.log("масив: %s", arr);
+            console.log("елементи: %d, %d, %d", arr[0], arr[1], arr[2]);
+        }
+        
+        function test4() {
+            console.clear();
+            console.log("все в одному");
+            let numbers = [7, 14, 21];
+            let n = 7;
+            for (let i = 0; i < numbers.length; i++) {
+                console.log(numbers[i] + " % " + n + " = " + (numbers[i] % n));
+            }
+        }
+
+        function showInfo() {
+            console.info('Це інформаційне повідомлення');
+        }
+        
+        function showWarn() {
+            console.warn('Увага! Це попередження');
+        }
+        
+        function showError() {
+            console.error('Ой! Сталася помилка');
+        }
+        
+        function showDir() {
+            const obj = { 
+                name: 'Тест', 
+                value: 42, 
+                items: ['a', 'b', 'c'] 
+            };
+            console.dir(obj);
+        }
+        
+        function showDirXml() {
+            console.dirxml(document.body);
+        }
+        
+        function measureTime() {
+            console.time('Час виконання');
+            for (let i = 0; i < 1000000; i++) { }
+            console.timeEnd('Час виконання');
+        }
+        
+        function startProfile() {
+            console.profile('Мій профіль');
+            for (let i = 0; i < 1000000; i++) { }
+            console.profileEnd('Мій профіль');
+        }
+        
+        function testAssert() {
+            const x = 5;
+            console.assert(x === 10, 'x не дорівнює 10!');
+            console.assert(x === 5, 'x не дорівнює 5!');
+        }
+
+        window.onload = function() {
+            createMatrix();
+            console.log('Вітаємо! Відкрийте консоль (F12) для перегляду результатів.');
+        };
+    </script>
+</body>
+</html>
