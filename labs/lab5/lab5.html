@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="menu-container">
+            <div class="logo">My Site</div>
+            <div class="niggerburger" onclick="toggleMenu()">☰</div>
+            <div class="menu-links" id="navMenu">
+                <a href="#">Головна</a>
+                <a href="#">Про нас</a>
+                <a href="#">Послуги</a>
+                <a href="#">Контакти</a>
+                <button class="theme-btn" onclick="toggleTheme()">Змінити тему</button>
+            </div>
+        </div>
+    </nav>
+
+    <button class="popup-btn" onclick="openModal()">Показати повідомлення</button>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-window">
+            <span class="close-modal" onclick="closeModalBtn()">×</span>
+            <h3>Важливе повідомлення</h3>
+            <p>Це спливаюче вікно для Лабораторної роботи №5.</p>
+        </div>
+    </div>
+
+    <div id="tabbed_box" class="tabbed_box">
+        <h4>Browse Site <small>Select a Tab</small></h4>
+        <div class="tabbed_area">
+            <ul class="tabs">
+                <li><a href="javascript:void(0);" onclick="tabSwitch('tab_1', 'content_1');" id="tab_1" class="active">Topics</a></li>
+                <li><a href="javascript:void(0);" onclick="tabSwitch('tab_2', 'content_2');" id="tab_2">Archives</a></li>
+                <li><a href="javascript:void(0);" onclick="tabSwitch('tab_3', 'content_3');" id="tab_3">Pages</a></li>
+            </ul>
+
+            <div id="content_1" class="content">
+                <ul>
+                    <li><a href="">HTML Techniques <small>4 Posts</small></a></li>
+                    <li><a href="">CSS Styling <small>32 Posts</small></a></li>
+                    <li><a href="">Flash Tutorials <small>2 Posts</small></a></li>
+                    <li><a href="">Web Miscellanious <small>19 Posts</small></a></li>
+                </ul>
+            </div>
+
+            <div id="content_2" class="content">
+                <ul>
+                    <li><a href="">December 2025 <small>6 Posts</small></a></li>
+                    <li><a href="">November 2025 <small>4 Posts</small></a></li>
+                    <li><a href="">October 2025 <small>22 Posts</small></a></li>
+                </ul>
+            </div>
+
+            <div id="content_3" class="content">
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Contribute</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function tabSwitch(new_tab, new_content) {
+            document.getElementById('content_1').style.display = 'none';
+            document.getElementById('content_2').style.display = 'none';
+            document.getElementById('content_3').style.display = 'none';
+            
+            document.getElementById(new_content).style.display = 'block';
+
+            document.getElementById('tab_1').className = '';
+            document.getElementById('tab_2').className = '';
+            document.getElementById('tab_3').className = '';
+            
+            document.getElementById(new_tab).className = 'active';
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+        }
+
+        function openModal() {
+            document.getElementById('modalOverlay').style.display = 'flex';
+        }
+
+        function closeModalBtn() {
+            document.getElementById('modalOverlay').style.display = 'none';
+        }
+
+        function closeModal(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                document.getElementById('modalOverlay').style.display = 'none';
+            }
+        }
+
+        function toggleMenu() {
+            var menu = document.getElementById('navMenu');
+            if (menu.style.display === "flex") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "flex";
+                menu.classList.add('open');
+            }
+        }
+    </script>
+</body>
+</html>
