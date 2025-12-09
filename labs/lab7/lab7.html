@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота 7 (Варіант 4)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Лабораторна робота №7 (Варіант 4)</h1>
+
+    <div class="task">
+        <h3>Завдання 1: Довжина рядка</h3>
+        <input type="text" id="inp1" placeholder="Введіть рядок">
+        <button onclick="task1()">Дізнатися довжину</button>
+        <div id="res1" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 2: Регістри</h3>
+        <input type="text" id="inp2" placeholder="Введіть рядок">
+        <button onclick="task2()">Конвертувати</button>
+        <div id="res2" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 3: Індекс символу</h3>
+        <input type="text" id="inp3_str" placeholder="Рядок">
+        <input type="text" id="inp3_char" placeholder="Символ для пошуку" maxlength="1" style="width: 50px;">
+        <button onclick="task3()">Знайти індекс</button>
+        <div id="res3" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 4: Кількість входжень символу</h3>
+        <input type="text" id="inp4_str" placeholder="Рядок">
+        <input type="text" id="inp4_char" placeholder="Символ" maxlength="1" style="width: 50px;">
+        <button onclick="task4()">Порахувати</button>
+        <div id="res4" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 5: Обмін сусідніх символів</h3>
+        <input type="text" id="inp5" placeholder="Введіть рядок (напр. abcdef)">
+        <button onclick="task5()">Змінити місцями</button>
+        <div id="res5" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 6: Перевірка на спам</h3>
+        <p><small>Маркери: 100% безкоштовно, збільшення продажів, тільки сьогодні, не видаляйте</small></p>
+        <input type="text" id="inp6" placeholder="Введіть текст повідомлення">
+        <button onclick="task6()">Перевірити</button>
+        <div id="res6" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 7: Скорочення рядка (Truncate)</h3>
+        <input type="text" id="inp7_str" placeholder="Рядок">
+        <input type="number" id="inp7_len" placeholder="Макс. довжина" style="width: 100px;">
+        <button onclick="task7()">Скоротити</button>
+        <div id="res7" class="result"></div>
+    </div>
+
+    <hr>
+    <h2>Індивідуальні завдання (Варіант 4)</h2>
+
+    <div class="task">
+        <h3>Завдання 8.4: Анаграма</h3>
+        <p>Перевіряє, чи є перший рядок анаграмою другого.</p>
+        <input type="text" id="inp8_1" placeholder="Слово 1 (напр. listen)">
+        <input type="text" id="inp8_2" placeholder="Слово 2 (напр. silent)">
+        <button onclick="task8()">Перевірити анаграму</button>
+        <div id="res8" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 9.4: Пошук підрядка</h3>
+        <p>Перевіряє чи містить рядок інший рядок і повертає індекс.</p>
+        <input type="text" id="inp9_main" placeholder="Головний рядок">
+        <input type="text" id="inp9_sub" placeholder="Підрядок для пошуку">
+        <button onclick="task9()">Знайти</button>
+        <div id="res9" class="result"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 10.4: Цензура слів</h3>
+        <p>Замінює символи в заборонених словах на "*", крім першої та останньої.</p>
+        <input type="text" id="inp10_text" placeholder="Текст (напр. This is a badword)">
+        <input type="text" id="inp10_bad" placeholder="Заборонені слова через кому (напр. badword, spam)">
+        <button onclick="task10()">Цензурувати</button>
+        <div id="res10" class="result"></div>
+    </div>
+
+    <script>
+        function show(id, text) {
+            document.getElementById(id).innerText = "Результат: " + text;
+        }
+
+        function task1() {
+            const s = document.getElementById('inp1').value;
+            show('res1', s.length);
+        }
+
+        function task2() {
+            const s = document.getElementById('inp2').value;
+            show('res2', `Upper: ${s.toUpperCase()} | Lower: ${s.toLowerCase()}`);
+        }
+
+        function task3() {
+            const s = document.getElementById('inp3_str').value;
+            const char = document.getElementById('inp3_char').value;
+            show('res3', s.indexOf(char));
+        }
+
+        function task4() {
+            const s = document.getElementById('inp4_str').value;
+            const char = document.getElementById('inp4_char').value;
+            if(!char) return;
+            let count = s.split(char).length - 1;
+            show('res4', count);
+        }
+
+        function task5() {
+            const s = document.getElementById('inp5').value;
+            let res = '';
+            for (let i = 0; i < s.length; i += 2) {
+                let first = s[i];
+                let second = s[i+1] || '';
+                res += second + first;
+            }
+            show('res5', res);
+        }
+
+        function task6() {
+            const s = document.getElementById('inp6').value.toLowerCase();
+            const spamWords = ["100% безкоштовно", "збільшення продажів", "тільки сьогодні", "не видаляйте"];
+            let isSpam = spamWords.some(word => s.includes(word));
+            show('res6', isSpam);
+        }
+
+        function task7() {
+            const s = document.getElementById('inp7_str').value;
+            const max = parseInt(document.getElementById('inp7_len').value);
+            
+            if (s.length > max) {
+                show('res7', s.slice(0, max - 3) + "...");
+            } else {
+                show('res7', s);
+            }
+        }
+
+        function task8() {
+            let s1 = document.getElementById('inp8_1').value;
+            let s2 = document.getElementById('inp8_2').value;
+            
+            const normalize = (str) => str.toLowerCase().replace(/\s/g, '').split('').sort().join('');
+            
+            let isAnagram = normalize(s1) === normalize(s2);
+            show('res8', isAnagram);
+        }
+
+        function task9() {
+            const main = document.getElementById('inp9_main').value;
+            const sub = document.getElementById('inp9_sub').value;
+            
+            let index = main.indexOf(sub);
+            let resultText = (index !== -1) 
+                ? `Знайдено на позиції: ${index}` 
+                : "Підрядок не знайдено";
+            show('res9', resultText);
+        }
+
+        function task10() {
+            const text = document.getElementById('inp10_text').value;
+            const badInput = document.getElementById('inp10_bad').value;
+            const badWords = badInput.split(',').map(w => w.trim());
+
+            function maskWord(word) {
+                if (word.length <= 2) return word;
+                return word[0] + '*'.repeat(word.length - 2) + word[word.length - 1];
+            }
+
+            let result = text;
+            
+            badWords.forEach(bad => {
+                if(bad.length > 0) {
+                    const regex = new RegExp(bad, 'gi'); 
+                    result = result.replace(regex, (match) => maskWord(match));
+                }
+            });
+
+            show('res10', result);
+        }
+    </script>
+</body>
+</html>
