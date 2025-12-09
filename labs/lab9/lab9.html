@@ -1,1 +1,112 @@
-blackw1ndow
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота 9</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Лабораторна робота 9</h1>
+
+    <div id="scene">
+        <div id="center-logo">(0)</div>
+        <div id="satellite"></div>
+        <div id="info-text"></div>
+    </div>
+
+    <button onclick="toggle()">Старт / Стоп</button>
+
+    <script>
+        let isRunning = false;
+        let reqId;
+
+        const logo = document.getElementById('center-logo');
+        const sat = document.getElementById('satellite');
+        const textField = document.getElementById('info-text');
+        const scene = document.getElementById('scene');
+
+        let angle = 0;
+        let scaleVal = 1;
+        
+        const message = "downloading pro virus inzhener program zabezpechenya......";
+        let charIndex = 0;
+        let frameCount = 0;
+
+        function toggle() {
+            isRunning = !isRunning;
+            if (isRunning) {
+                loop();
+            } else {
+                cancelAnimationFrame(reqId);
+            }
+        }
+
+        function createSignal() {
+            const sig = document.createElement('div');
+            sig.className = 'signal';
+            sig.style.left = '295px'; 
+            sig.style.top = '195px';
+            scene.appendChild(sig);
+
+            let size = 10;
+            let opacity = 1;
+
+            function expand() {
+                if (!isRunning) {
+                    sig.remove();
+                    return;
+                }
+                size += 2;
+                opacity -= 0.02;
+                sig.style.width = size + 'px';
+                sig.style.height = size + 'px';
+                sig.style.left = (300 - size/2) + 'px';
+                sig.style.top = (200 - size/2) + 'px';
+                sig.style.opacity = opacity;
+
+                if (opacity > 0) {
+                    requestAnimationFrame(expand);
+                } else {
+                    sig.remove();
+                }
+            }
+            expand();
+        }
+
+        function loop() {
+            frameCount++;
+
+            angle += 0.05;
+            const radius = 120 + Math.sin(angle * 3) * 20; 
+            
+            const centerX = 290;
+            const centerY = 190;
+            
+            const x = centerX + Math.cos(angle) * radius;
+            const y = centerY + Math.sin(angle) * radius;
+
+            sat.style.left = x + 'px';
+            sat.style.top = y + 'px';
+
+            scaleVal = 1 + Math.sin(angle * 4) * 0.15;
+            logo.style.transform = `scale(${scaleVal})`;
+
+            if (frameCount % 5 === 0) {
+                if (charIndex <= message.length) {
+                    textField.innerText = message.substring(0, charIndex);
+                    charIndex++;
+                } else {
+                    if (frameCount % 100 === 0) charIndex = 0;
+                }
+            }
+
+            if (frameCount % 40 === 0) {
+                createSignal();
+            }
+
+            reqId = requestAnimationFrame(loop);
+        }
+    </script>
+</body>
+</html>
