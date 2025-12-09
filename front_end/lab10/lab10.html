@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Грибний Світ</title>
+    <style>
+      .carousel-item img {
+        height: 400px;
+        object-fit: cover;
+      }
+      .feature-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">🍄 Грибний Світ</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Головна</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Каталог
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Лісові гриби</a></li>
+                <li><a class="dropdown-item" href="#">Вирощені на фермі</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Сушені гриби</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contacts">Контакти</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mushroomCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#mushroomCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#mushroomCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#mushroomCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="img/forest.jpg" class="d-block w-100" alt="Ліс">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Свіжість лісу</h5>
+            <p>Тільки найкращі екологічно чисті гриби.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="img/post.jpg" class="d-block w-100" alt="Кошик грибів">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Доставка додому</h5>
+            <p>Замовляйте онлайн та отримуйте швидку доставку.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="img/scale.jpg" class="d-block w-100" alt="Приготування">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Рецепти</h5>
+            <p>Дізнайтеся, як приготувати найсмачніші страви.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#mushroomCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#mushroomCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <div class="container my-5">
+      <div class="row text-center align-items-center">
+        <div class="col-md-3 bg-light p-3 border rounded">
+          <div class="feature-icon">🚚</div>
+          <h4>Швидка доставка</h4>
+          <p>Доставляємо протягом 24 годин.</p>
+          <button type="button" class="btn btn-info text-white">Деталі</button> 
+        </div>
+        
+        <div class="col-md-6 p-4">
+          <h2 class="display-5">Ласкаво просимо!</h2>
+          <p class="lead">Ми пропонуємо найширший вибір грибів: від звичайних печериць до рідкісних трюфелів. Наша продукція сертифікована та безпечна.</p>
+          <button type="button" class="btn btn-primary btn-lg">Читати про нас</button>
+        </div>
+
+        <div class="col-md-3 bg-light p-3 border rounded">
+          <div class="feature-icon">💯</div>
+          <h4>Гарантія якості</h4>
+          <p>Повернемо кошти, якщо товар не сподобається.</p>
+          <button type="button" class="btn btn-warning">Умови</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mb-5">
+      <h3 class="text-center mb-4">Популярні товари</h3>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="img/whitegryb.jpg" class="card-img-top" alt="Білий гриб">
+            <div class="card-body">
+              <h5 class="card-title">Білий Гриб</h5>
+              <p class="card-text">Король усіх грибів. Ідеальний для супів та соусів. Висока якість.</p>
+              <a href="#" class="btn btn-success w-100">Купити - 300 грн/кг</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="img/cavegryb.jpg" class="card-img-top" alt="Печериці">
+            <div class="card-body">
+              <h5 class="card-title">Печериці Королівські</h5>
+              <p class="card-text">Свіжі, вирощені на еко-фермі. Підходять для грилю та салатів.</p>
+              <a href="#" class="btn btn-success w-100">Купити - 80 грн/кг</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <img src="img/foxgryb.jpg" class="card-img-top" alt="Лисички">
+            <div class="card-body">
+              <h5 class="card-title">Лисички</h5>
+              <p class="card-text">Яскраві, смачні та корисні. Сезонний продукт.</p>
+              <a href="#" class="btn btn-success w-100">Купити - 150 грн/кг</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="bg-dark text-white py-5" id="contacts">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <h4>Підпишіться на новини</h4>
+            <form>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Ваш Email</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="name@example.com">
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Я погоджуюсь з умовами</label>
+              </div>
+              <button type="submit" class="btn btn-outline-light">Підписатися</button>
+            </form>
+          </div>
+          <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+            <h5>Контакти</h5>
+            <p>📍 м. Київ, вул. Лісова, 1</p>
+            <p>📞 +38 (099) 123-45-67</p>
+            <p>✉️ shop@griby.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
