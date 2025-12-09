@@ -1,1 +1,118 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота 10</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
 
+    <h1>Лабораторна робота 10</h1>
+
+    <div class="task-block">
+        <h3>Завдання 1 та 2</h3>
+        
+        <p>Перший абзац тексту.</p>
+        
+        <div id="hover-div">
+            Наведіть сюди курсор миші
+        </div>
+        
+        <br>
+        <button class="show-btn">Показати текст</button>
+        <div id="hide_text" style="display: none; margin-top: 10px; color: grey;">
+            Прихований текст з'явився!
+        </div>
+
+        <p>Останній абзац тексту.</p>
+    </div>
+
+    <div class="task-block">
+        <h3>Завдання 3</h3>
+
+        <p>Клікніть по блоку (1 раз - стиль, 2 рази - скидання):</p>
+        <div id="box-interaction">BOX</div>
+
+        <div style="margin: 15px 0;">
+            <button id="btn-single">Одинарний клік</button>
+            <button id="btn-double">Подвійний клік</button>
+        </div>
+
+        <div>
+            <span class="show-link" id="show-img-text">Показати зображення</span>
+            <div id="img-wrapper">
+                <img id="my-image" src="img.jpg" alt="Capybara">
+                <div id="img-caption">Капібара звичайна</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <p>Введіть слово <b>correct</b>:</p>
+            <form action="javascript:void(0);">
+                <input type="text" id="check-input">
+                <input type="submit" value="Перевірити">
+                <span class="msg"></span>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            
+            $("p:first").text("DOM first!");
+            $("p:last").text("DOM last ПИШИ КОРЕКТ АНГЛІЙСЬКИМИ БУКвАМИ");
+
+            $("#hover-div").hover(
+                function() { $(this).addClass("highlight"); },
+                function() { $(this).removeClass("highlight"); }
+            );
+
+            $(".show-btn").click(function() {
+                $("#hide_text").show(200);
+            });
+
+            $("#box-interaction").on("click", function() {
+                $(this).addClass("active-box");
+            });
+
+            $("#box-interaction").on("dblclick", function() {
+                $(this).removeClass("active-box");
+            });
+
+            $("#btn-single").click(function() {
+                alert("Одинарний клік");
+            });
+
+            $("#btn-double").dblclick(function() {
+                alert("Подвійний клік");
+            });
+
+            $("#show-img-text").click(function() {
+                $("#my-image").show();
+                $(this).hide();
+            });
+
+            $("#my-image").click(function() {
+                $(this).hide();
+                $("#show-img-text").show();
+            });
+
+            $("#my-image").hover(
+                function() { $("#img-caption").show(); },
+                function() { $("#img-caption").hide(); }
+            );
+
+            $("form").submit(function() {
+                var val = $("#check-input").val();
+                if (val === "correct") {
+                    $(".msg").css("color", "green").text("Успішно!").show();
+                } else {
+                    $(".msg").css("color", "red").text("Неправильно!").show().fadeOut(1000);
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
