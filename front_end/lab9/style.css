@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+
+@font-face {
+    font-family: 'MyLocalFont';
+    src: url('arial.ttf') format('truetype'); 
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'MyLocalFont', sans-serif; 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: #FFD700;
+    padding: 20px;
+    border: 2px solid black;
+    font-family: 'Caveat', cursive; 
+    font-size: 1.5rem;
+}
+
+.main-container {
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+
+.sidebar-left {
+    background-color: #4169E1;
+    width: 20%;
+    padding: 15px;
+    border: 2px solid black;
+    color: white;
+}
+
+.content {
+    background-color: white;
+    width: calc(60% - 10px); 
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: auto;
+    position: relative;
+}
+
+.text-content {
+    padding: 15px;
+}
+
+.bottom-red-block {
+    background-color: #FF6347;
+    height: 60px;
+    border-top: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+.sidebar-right {
+    background-color: #4169E1;
+    width: 20%;
+    padding: 15px;
+    border: 2px solid black;
+    color: white;
+}
+
+.footer {
+    background-color: #FFD700;
+    padding: 20px;
+    border: 2px solid black;
+}
+
+.footer::after {
+    content: attr(data-info);
+    font-size: 0.8em;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .sidebar-left, 
+    .content, 
+    .sidebar-right {
+        width: 100%; 
+    }
+    
+    .content {
+        order: -1;
+        min-height: 300px;
+    }
+    
+    .header, .footer {
+        text-align: center;
+    }
+}
+
+@media print {
+    body {
+        color: black;
+        background: white;
+    }
+    
+    .header, .sidebar-left, .sidebar-right, .bottom-red-block, .footer {
+        background-color: transparent;
+        border: 1px solid #ccc;
+        color: black;
+    }
+    
+    .sidebar-left, .sidebar-right {
+        display: none;
+    }
+    
+    .content {
+        width: 100%;
+        border: none;
+    }
+}
