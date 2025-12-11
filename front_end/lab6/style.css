@@ -1,0 +1,396 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background: linear-gradient(135deg, #f9f9f9 0%, #e8f5e9 100%);
+    perspective: 1000px;
+    overflow-x: hidden;
+    min-height: 100vh;
+    caret-color: #4CAF50;
+}
+
+.page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+header {
+    background: radial-gradient(circle at center, #4CAF50 0%, #2E7D32 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    border-radius: 15px 15px 0 0;
+    outline: 3px dashed rgba(255, 255, 255, 0.5);
+    outline-offset: -10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    transform: rotateX(5deg) translateZ(20px);
+    transform-origin: center top;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    text-decoration: underline wavy #fff;
+}
+
+header p {
+    margin: 0.5rem 0 0;
+    font-size: 1.2rem;
+}
+
+nav {
+    background-color: #f8f8f8;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0 0 15px 15px;
+    cursor: grab;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+    text-decoration: underline dotted #4CAF50;
+}
+
+nav a:hover {
+    color: #4CAF50;
+    cursor: pointer;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    resize: both;
+    overflow: auto;
+}
+
+article {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 10px solid transparent;
+    border-image: linear-gradient(45deg, #4CAF50, #8BC34A) 1;
+    border-image-width: 10px;
+    border-image-outset: 5px;
+    border-image-repeat: round;
+    transform: perspective(800px) rotateY(-1deg);
+    transform-origin: center center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    backface-visibility: visible;
+}
+
+article h2 {
+    color: #4CAF50;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+section {
+    margin-bottom: 2rem;
+    outline: 2px solid #e8f5e9;
+    outline-offset: 10px;
+    padding: 1rem;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.8);
+    transition: all 0.3s ease;
+}
+
+section h3 {
+    color: #2E7D32;
+    text-decoration: underline overline #4CAF50;
+}
+
+figure {
+    margin: 1rem 0;
+    text-align: center;
+    cursor: zoom-in;
+    transform: perspective(600px) rotateX(5deg);
+    transform-origin: center bottom;
+    transition: transform 0.5s ease;
+}
+
+figcaption {
+    font-style: italic;
+    color: #666;
+    margin-top: 0.5rem;
+    text-decoration: underline;
+    transform: skewY(-2deg);
+    display: inline-block;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 5px solid white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+aside {
+    background: linear-gradient(to right, #f0f7f0, #e8f5e9);
+    padding: 1rem;
+    border-left: 4px solid #4CAF50;
+    margin: 1rem 0;
+    border-radius: 0 10px 10px 0;
+    cursor: help;
+    transform: perspective(500px) rotateY(2deg);
+    transform-origin: left center;
+    transition: transform 0.4s ease;
+}
+
+blockquote {
+    font-style: italic;
+    color: #555;
+    padding: 1rem;
+    background-color: #f8f8f8;
+    border-left: 4px solid #4CAF50;
+    margin: 1rem 0;
+    border-radius: 0 15px 15px 0;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    cursor: text;
+    transform: perspective(700px) rotateX(2deg);
+    transform-origin: center top;
+    transition: transform 0.4s ease;
+}
+
+blockquote::before, blockquote::after {
+    content: '"';
+    font-size: 1.5em;
+    color: #4CAF50;
+}
+
+footer {
+    background: linear-gradient(to bottom, #333, #222);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+    border-radius: 0 0 15px 15px;
+    outline: 2px dotted #4CAF50;
+    outline-offset: -5px;
+    transform: perspective(1000px) rotateX(-5deg);
+    transform-origin: center bottom;
+    transition: transform 0.6s ease;
+}
+
+footer a {
+    color: #4CAF50;
+    text-decoration: none;
+    cursor: cell;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+ul, ol {
+    padding-left: 2rem;
+    border-left: 3px solid #4CAF50;
+    border-image: linear-gradient(to bottom, #4CAF50, #8BC34A) 1;
+}
+
+li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.list-3d li {
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    transform: perspective(300px) rotateY(5deg);
+    transition: all 0.3s ease;
+    padding: 5px 15px;
+    background: #f0f7f0;
+    border-radius: 20px;
+}
+
+.komah-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.6s ease;
+    opacity: 0;
+    transform: skewY(-1deg);
+    transform-origin: top center;
+    padding: 0 20px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.komah-details.active {
+    max-height: 1000px;
+    opacity: 1;
+    padding: 20px;
+    margin-top: 15px;
+    background-color: #f1f8e9;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.komah-link {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 5px;
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+    transform: skewY(-2deg);
+    transform-origin: left center;
+}
+
+.komah-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.decorative-3d {
+    position: fixed;
+    right: 5%;
+    top: 200px;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(45deg, #4CAF50, #8BC34A);
+    transform: perspective(500px) rotateX(15deg) rotateY(15deg) rotateZ(5deg);
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0.7;
+    box-shadow: 10px 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.5s ease;
+}
+
+.decorative-2d {
+    position: fixed;
+    left: 5%;
+    bottom: 100px;
+    width: 100px;
+    height: 100px;
+    background: #8BC34A;
+    transform: skewY(-15deg) rotate(15deg);
+    border-radius: 50% 20% 50% 20%;
+    z-index: -1;
+    opacity: 0.5;
+    transition: all 0.4s ease;
+}
+
+header:hover {
+    transform: rotateX(8deg) translateZ(30px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+article:hover {
+    transform: perspective(800px) rotateY(-3deg) translateZ(15px);
+    box-shadow: 5px 10px 30px rgba(0,0,0,0.15);
+}
+
+figure:hover {
+    transform: perspective(600px) rotateX(8deg) translateZ(10px);
+}
+
+.list-3d li:hover {
+    transform: perspective(300px) rotateY(0deg) translateZ(5px);
+    background: #4CAF50;
+    color: white;
+}
+
+footer:hover {
+    transform: perspective(1000px) rotateX(-8deg) translateZ(20px);
+}
+
+nav a:hover {
+    color: #4CAF50;
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+section:hover {
+    outline-color: #4CAF50;
+    background: white;
+}
+
+.komah-link:hover {
+    background-color: #4CAF50;
+    color: white;
+    transform: skewY(-2deg) scale(1.05);
+}
+
+aside:hover {
+    transform: perspective(500px) rotateY(5deg);
+}
+
+blockquote:hover {
+    transform: perspective(700px) rotateX(5deg);
+}
+
+.decorative-3d:hover {
+    transform: perspective(500px) rotateX(20deg) rotateY(20deg) rotateZ(10deg) translateZ(30px);
+}
+
+.decorative-2d:hover {
+    transform: skewY(-15deg) rotate(15deg) scale(1.2);
+    opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+    .header-3d, .article-3d, .footer-3d, .aside-3d, .blockquote-3d {
+        transform: none !important;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .decorative-3d, .decorative-2d {
+        display: none;
+    }
+    
+    .list-3d li {
+        display: block;
+        margin: 5px 0;
+        transform: none;
+    }
+    
+    .komah-details {
+        transform: none;
+    }
+    
+    article {
+        padding: 1rem;
+        resize: none;
+    }
+    
+    section {
+        outline: none;
+    }
+}
+
+address, time {
+    display: block;
+    margin: 10px 0;
+}
