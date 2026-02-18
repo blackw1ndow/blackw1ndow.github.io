@@ -2,7 +2,7 @@
 // MODIFIED BY - vk.com/kizzn
 
 // уебки не лезьте сюда
-// извини меня эрик ...
+// извени меня ерик
 (function() {
     const original_CanvasRenderingContext2D_fillText = CanvasRenderingContext2D.prototype.fillText;
     let chatStatus = 0;
@@ -228,7 +228,7 @@
     
     function zeroCaptchaX() {
         if (!zeroCaptchaHelp) {
-            if () {
+            if (zeroCaptchaStatus) {
                 zeroCaptchaStatus = 0;
                 zeroCaptchaHelp = 1;
                 typeChat('Капча с окончанием на 0 выключена');
