@@ -44,7 +44,7 @@
     let captchaLagStatus = 0;
     let captchaLagHelp = 0;
     let captchaLagWaiting = 0;
-    let zeroCaptchaStatus = 0;
+    let zeroCaptchaStatus = 1;
     let zeroCaptchaHelp = 0;
     let captchaMinSize = 90;
     let captchaMaxSize = 140;
