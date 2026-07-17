@@ -1,6 +1,4 @@
 const SIZE = 20;
-const COLOR = "aliceblue";
-const BG = "#0A0A0A";
 
 const ART_B64 =
   "ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF9fCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBfLi1+ICApCiAg" +
@@ -9,7 +7,7 @@ const ART_B64 =
   "QCknIC0tLX5+fn4gICAgICAsJwogICAgICAgICAgICAvLiAuIC4gLiAnfn4gICAgICAgICAgICAgLC0nCiAgICAgICAgICAgLy4gLiAu" +
   "IC4gLiAgICAgICAgICAgICAsLScKICAgICAgICAgIDsgLiAuIC4gLiAgLSAuICAgICAgICAsJwogICAgICAgICA6IC4gLiAuIC4gICAg" +
   "ICAgXyAgICAgLwogICAgICAgIC4gLiAuIC4gLiAgICAgICAgICBgLS46CiAgICAgICAuIC4gLiAuLyAgLSAuICAgICAgICAgICkKICAg" +
-  "ICAgLiAgLiAuIHwgIF9fX19fLi4tLS0uLl8vCn4tLS1+fn5+LS0tLX5+fn4gICAgICAgICAgICAgfn4=";
+  "ICAgLiAgLiAuIHwgICAgICAgICAgICAgIC8gfi0tLX5+fn4tLS0tfn5+fgp+LS0tfn5+fi0tLS1+fn4tLS0tfn5+fn4tLS1+fn5+LS0tLX5+fn4=";
 
 const art = atob(ART_B64).split("\n");
 
@@ -31,8 +29,11 @@ const startY = (canvas.height - ROWS * LINE_H) / 2;
 const start = performance.now();
 
 function draw(now) {
+  const light = document.body.classList.contains("light");
+const COLOR = light ? "#0A0A0A" : "aliceblue";
+const BG = light ? "aliceblue" : "#0A0A0A";
   const t = (now - start) / 1000;
-  const blink = (t % 2.6) < 0.3;
+  const blink = (t % 2) < 0.3;
 
   ctx.fillStyle = BG;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -53,3 +54,9 @@ function draw(now) {
 }
 
 requestAnimationFrame(draw);
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("theme").addEventListener("click", () => {
+    document.body.classList.toggle("light");
+  });
+});

@@ -1,16 +1,42 @@
-html, body {
+body {
+    margin: 0;
+    min-height: 100vh;
     background-color: #0A0A0A;
+    color: aliceblue;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    font-family: 'Consolas', Arial, monospace;
 }
 
 h1 {
-    display: flex;
-    color: aliceblue;
+    margin: 50px 0;
 }
 
 canvas {
-    display: block;
-    padding-top: 100px;
+    margin-top: 25px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+a {
+    margin: 20px;
+    color: cadetblue;
+}
+
+#theme {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+}
+
+body.light {
+    background-color: aliceblue;
+    color: #0A0A0A;
 }
