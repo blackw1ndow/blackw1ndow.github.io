@@ -1,0 +1,16 @@
+html, body {
+    background-color: #0A0A0A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    display: flex;
+    color: aliceblue;
+}
+
+canvas {
+    display: block;
+    padding-top: 100px;
+}
